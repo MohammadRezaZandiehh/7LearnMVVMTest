@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+
+@SuppressWarnings("unused")
 @Entity(tableName = "students")
 public class Student {
 
@@ -79,4 +81,5 @@ public class Student {
 	public void setUpdatedAt(String updatedAt) {
 		mUpdatedAt = updatedAt;
 	}
+
 }

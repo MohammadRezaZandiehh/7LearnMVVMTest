@@ -8,18 +8,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainViewModelFactory implements ViewModelProvider.Factory {
-private ApiService apiService;
-    public MainViewModelFactory(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://expertdevelopers.ir/api/v1/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        apiService=retrofit.create(ApiService.class);
+    private StudentRepository repository;
+    public MainViewModelFactory(StudentRepository repository) {
+        this.repository = repository;
     }
+
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new MainViewModel(apiService);
+        return (T) new MainViewModel(repository);
     }
 }

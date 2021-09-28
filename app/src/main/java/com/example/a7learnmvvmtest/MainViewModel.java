@@ -12,33 +12,21 @@ import retrofit2.Response;
 
 public class MainViewModel extends ViewModel {
 
-    private ApiService apiService;
-    private MutableLiveData<List<Student>> studentLiveData = new MutableLiveData<>();
-    private MutableLiveData<String> errorLiveData = new MutableLiveData<>();
+    private StudentRepository repository;
+    private MutableLiveData<String> error = new MutableLiveData<>();
 
-    public MainViewModel(ApiService apiService) {
-        this.apiService = apiService;
-        apiService.getStudents().enqueue(new Callback<List<Student>>() {
-            @Override
-            public void onResponse(Call<List<Student>> call, Response<List<Student>> response) {
-                studentLiveData.setValue(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Student>> call, Throwable t) {
-                errorLiveData.setValue("خطای نا مشخص");
-            }
-        });
-
-
-    }
-
-    public LiveData<List<Student>> getStudentLiveData() {
-        return studentLiveData;
+    public MainViewModel(StudentRepository repository) {
+        this.repository = repository;
+        repository.refreshStudent();
     }
 
 
-    public LiveData<String> getErrorLiveData() {
-        return errorLiveData;
+    //read:
+    public LiveData<List<Student>> getStudents() {
+        return repository.getStudents();
+    }
+
+    public LiveData<String> getError() {
+        return error;
     }
 }
