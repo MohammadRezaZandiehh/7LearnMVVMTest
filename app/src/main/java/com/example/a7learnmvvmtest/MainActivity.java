@@ -13,8 +13,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainViewModel mainViewModel = new ViewModelProvider(this, new MainViewModelFactory(new StudentRepository(ApiServiceProvider.getApiService(), AppDatabase.getInstance(getApplicationContext()).studentDao()))).get(MainViewModel.class);
-
+        MainViewModel mainViewModel = new ViewModelProvider(this, new MainViewModelFactory(new StudentRepository(ApiServiceProvider.getApiService(),AppDatabase.getInstance(getApplicationContext()).studentDao())))
+                .get(MainViewModel.class);
         mainViewModel.getStudents().observe(this, students -> {
             Log.i(" MainActivity", "onCreate: ");
         });

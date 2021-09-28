@@ -19,22 +19,9 @@ public class StudentRepository {
     }
 
 
-    public void refreshStudent() {
-        apiService.getStudents().enqueue(new Callback<List<Student>>() {
-            @Override
-            public void onResponse(Call<List<Student>> call, Response<List<Student>> response) {
-                List<Student> students = response.body();
-                studentDao.addStudents(students);
-// khate bala miad listi k request zadim ba API va tahvilesh gereftim ro , miare too database va zakhirashon mikone .
-            }
-
-            @Override
-            public void onFailure(Call<List<Student>> call, Throwable t) {
-
-            }
-        });
+    public Completable refreshStudents() {
+        return apiService.getStudents().doOnSuccess(students -> studentDao.addStudents(students)).ignoreElement();
     }
-
 
     public LiveData<List<Student>> getStudents() {
         return studentDao.getStudents();

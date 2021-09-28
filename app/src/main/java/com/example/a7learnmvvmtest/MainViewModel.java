@@ -6,18 +6,39 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.CompletableObserver;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 public class MainViewModel extends ViewModel {
 
-    private StudentRepository repository;
     private MutableLiveData<String> error = new MutableLiveData<>();
+    private StudentRepository repository;
+    private Disposable disposable;
 
     public MainViewModel(StudentRepository repository) {
+
         this.repository = repository;
-        repository.refreshStudent();
+        repository.refreshStudents()
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        error.postValue("خطای نامشخص");
+                    }
+                });
     }
 
 
@@ -28,5 +49,12 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<String> getError() {
         return error;
+    }
+
+
+    @Override
+    protected void onCleared() {
+        disposable.dispose();
+        super.onCleared();
     }
 }

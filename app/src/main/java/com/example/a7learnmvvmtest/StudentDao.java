@@ -10,12 +10,11 @@ import java.util.List;
 
 @Dao
 public interface StudentDao {
-
-    // read
+//read
     @Query("SELECT * FROM students")
     LiveData<List<Student>> getStudents();
-
-    //save
+//save
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addStudents(List<Student> students);
 }
+

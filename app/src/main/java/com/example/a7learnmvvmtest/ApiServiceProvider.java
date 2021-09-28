@@ -13,7 +13,8 @@ public class ApiServiceProvider {
                     .baseUrl("http://expertdevelopers.ir/api/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//khate balabaraye inke retrofit rxJava ro support kone .
+                    //khate balabaraye inke retrofit rxJava ro support kone .
+
                     .build();
             apiService = retrofit.create(ApiService.class);
         }
