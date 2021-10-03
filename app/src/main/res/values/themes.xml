@@ -1,11 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.7LearnMVVMTest" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Primary brand color. -->
+
+    <style name="Theme.7LearnMVVMTest" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="fontFamily">@font/primary_regular</item>
 
-        <!-- Customize your theme here. -->
     </style>
 </resources>

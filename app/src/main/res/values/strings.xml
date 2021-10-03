@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">7LearnMVVMTest</string>
+    <string name="app_name">Seven Learn</string>
+    <string name="main_addStudent">Add Student</string>
 </resources>
